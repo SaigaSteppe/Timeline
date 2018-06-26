@@ -12,7 +12,7 @@ public class TimeEvent implements Comparable<TimeEvent>{
 	}
 	
 	public String getEvent() {
-		return event;
+		return this.event;
 	}
 
 	@Override

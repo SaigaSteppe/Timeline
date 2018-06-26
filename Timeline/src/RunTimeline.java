@@ -110,7 +110,7 @@ public class RunTimeline {
 					}
 
 					if(incrementIndex < calIncrement.size()) {
-						incrementIndex++;
+						++incrementIndex;
 					}
 					
 				}
@@ -127,7 +127,7 @@ public class RunTimeline {
 				System.out.println("-" + calIncrement.get(incrementIndex));
 				
 				if(incrementIndex < calIncrement.size()) {
-					incrementIndex++;
+					++incrementIndex;
 				}
 			}
 				
