@@ -10,7 +10,8 @@ The first coloumn contains the dates (unit: year)
 
 The Second coloumn contains the events
 
-e.g. 
+e.g.
+
 1753,Bismuth discovered
 
 1755,Magnesium discovered
@@ -18,6 +19,7 @@ e.g.
 1766,Hydrogen discovered
 
 1771, Oxygen discovered
+
 
 
 Rows don't neccessarily have to be in chronoogical order
