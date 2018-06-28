@@ -1,6 +1,7 @@
 import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
@@ -10,6 +11,7 @@ public class RunTimeline {
 	public static void main(String[] args) {
 		ArrayList<TimeEvent> timeEvent = new ArrayList<TimeEvent>();
 		timeEvent = readCSV("timeline1.csv");
+		Collections.sort(timeEvent);
 		Map<Integer, ArrayList<String>> map1 = mapDateEvents(timeEvent);
 		
 		
