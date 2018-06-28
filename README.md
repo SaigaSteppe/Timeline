@@ -12,11 +12,7 @@ The Second column contains the events
 
 e.g.
 
-<<<<<<< HEAD
-1669,Phosphorus discovered      
-=======
 1669,Phosphorus discovered  
->>>>>>> branch 'master' of https://github.com/SaigaSteppe/Timeline-text-based.git
 1735,Colbalt discovered  
 1735,Platinum discovered  
 1753,Bismuth discovered  
@@ -25,5 +21,7 @@ e.g.
 1771,Oxygen discovered  
 1772,Nitrogen discovered  
 1772,Barium discovered
+
+The rows in the csv don't have to be entered in chronological order
 
 
