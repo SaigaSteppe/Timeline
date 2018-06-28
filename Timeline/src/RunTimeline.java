@@ -1,23 +1,22 @@
 import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
-
-
 
 public class RunTimeline {
 	
 	public static void main(String[] args) {
 		ArrayList<TimeEvent> timeEvent = new ArrayList<TimeEvent>();
 		timeEvent = readCSV("timeline1.csv");
+		Map<Integer, ArrayList<String>> map1 = mapDateEvents(timeEvent);
 		
-		Collections.sort(timeEvent);
 		
 		int timelineStart = calculateStart(timeEvent);
 		int timelineEnd = calculateEnd(timeEvent);
 		
-		printTimeline(timeEvent, timelineStart,timelineEnd, calculateIncrement(timelineStart,timelineEnd));
+		printTimeline(map1, timelineStart,timelineEnd, calculateIncrement(timelineStart,timelineEnd));
 	}
 	
 	/**
@@ -44,6 +43,31 @@ public class RunTimeline {
 			System.out.println("IO exception");
 		}
 		return timeEvents;
+	}
+	
+	/**
+	 * Multivalue map, maps the unique dates with events
+	 */
+	public static Map<Integer, ArrayList<String>> mapDateEvents(ArrayList<TimeEvent>timeEvent){
+		
+		//array list with all the dates from the timeEvent array list
+		ArrayList<Integer> dates = new ArrayList<Integer>();
+		for(TimeEvent i:timeEvent) {
+			dates.add(i.getDate());
+		}
+				
+		//map with unique dates
+		Map<Integer, ArrayList<String>> multiValueMap = new HashMap<Integer, ArrayList<String>>();
+		for(Integer i:dates) {
+			multiValueMap.put(i, new ArrayList<String>());
+		}
+
+		//map dates with events
+		for(TimeEvent i: timeEvent){
+			multiValueMap.get(i.getDate()).add(i.getEvent());
+		}
+		
+		return multiValueMap;
 	}
 	
 	/**
@@ -94,39 +118,33 @@ public class RunTimeline {
 	/**
 	 * Prints the timeline
 	 */
-	public static void printTimeline( ArrayList<TimeEvent> t,int calStart, int calEnd, ArrayList<Integer> calIncrement) {
+	public static void printTimeline(Map<Integer, ArrayList<String>> dateEventMap,int calStart, int calEnd, ArrayList<Integer> calIncrement) {
 		int incrementIndex = 0;
-		int timeEventIndex = 0;
-		
-		for(int i = calStart; i<calEnd+1; ++i) {
-			
-			if(i == t.get(timeEventIndex).getDate()) {
+	
+		for(int i = calStart; i<=calEnd; i++) {
+
+			//i is equal to the date  in the map
+			if(dateEventMap.containsKey(i)) {
 				
-				if(t.get(timeEventIndex).getDate() == calIncrement.get(incrementIndex)) {
-					System.out.println("-" + t.get(timeEventIndex).getDate() + ", " + t.get(timeEventIndex).getEvent());
-
-					if(timeEventIndex < t.size()-1){
-						++timeEventIndex;
-					}
-
-					if(incrementIndex < calIncrement.size()) {
+				//the date of an event is equal to an increment date of the timeline
+				if(i == calIncrement.get(incrementIndex)) {
+					System.out.println("-" + i + " " + dateEventMap.get(i));
+					
+					if(incrementIndex < calIncrement.size()-1) {
 						++incrementIndex;
 					}
-					
 				}
-				else {
-					System.out.println(t.get(timeEventIndex).getDate() + " " + t.get(timeEventIndex).getEvent());
 				
-					if(timeEventIndex < t.size()-1){
-						++timeEventIndex;
-					}
+				else {
+					System.out.println(i + " " + dateEventMap.get(i));
 				}
 			}
 			
+			//i is equal to an increment date of the timeline
 			else if(i == calIncrement.get(incrementIndex)) {
 				System.out.println("-" + calIncrement.get(incrementIndex));
 				
-				if(incrementIndex < calIncrement.size()) {
+				if(incrementIndex < calIncrement.size()-1) {
 					++incrementIndex;
 				}
 			}
@@ -137,6 +155,6 @@ public class RunTimeline {
 		}
 		
 	}
-	
+
 
 }

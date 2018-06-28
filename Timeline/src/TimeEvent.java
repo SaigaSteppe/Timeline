@@ -1,4 +1,4 @@
-public class TimeEvent implements Comparable<TimeEvent>{
+public class TimeEvent{
 	private Integer date;
 	private String event;
 	
@@ -15,11 +15,4 @@ public class TimeEvent implements Comparable<TimeEvent>{
 		return this.event;
 	}
 
-	@Override
-	/**
-	 * Will be used to sort arrayList of TimeEvent objects according to date
-	 */
-	public int compareTo(TimeEvent o) {
-		return date.compareTo(o.date);
-	}
 }
