@@ -4,11 +4,11 @@ Simple timeline visualisation
 The program prints a timeline from the data of a csv file.
 
 # csv file
-The csv file has 2 coloumns.
+The csv file has 2 columns.
 
-The first coloumn contains the dates (unit: year)
+The first column contains the dates (unit: year)
 
-The Second coloumn contains the events
+The Second column contains the events
 
 e.g.
 
