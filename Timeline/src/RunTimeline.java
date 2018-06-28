@@ -14,7 +14,6 @@ public class RunTimeline {
 		Collections.sort(timeEvent);
 		Map<Integer, ArrayList<String>> map1 = mapDateEvents(timeEvent);
 		
-		
 		int timelineStart = calculateStart(timeEvent);
 		int timelineEnd = calculateEnd(timeEvent);
 		
@@ -102,16 +101,17 @@ public class RunTimeline {
 		else if(50<= difference  && difference < 100) {
 			increment = 10;
 		}
-		else if(difference < 200) {
-			increment = 20;
-		}
 		
 		else {
 			increment = (int) (10*(Math.floor(Math.abs(difference/100.0))));
 		}
 		
-		for(int i = calculateStart; i<=calculateEnd; i += increment) {
+		for(int i = calculateStart; i<calculateEnd; i += increment) {
 			timeIncrement.add(i);
+		}
+		
+		if(timeIncrement.contains(calculateEnd)) {
+			timeIncrement.remove(timeIncrement.indexOf(calculateEnd));
 		}
 		return timeIncrement;
 		
@@ -123,9 +123,9 @@ public class RunTimeline {
 	public static void printTimeline(Map<Integer, ArrayList<String>> dateEventMap,int calStart, int calEnd, ArrayList<Integer> calIncrement) {
 		int incrementIndex = 0;
 	
-		for(int i = calStart; i<=calEnd; i++) {
+		for(int i = calStart; i<calEnd; i++) {
 
-			//i is equal to the date  in the map
+			//i is equal to the date in the map
 			if(dateEventMap.containsKey(i)) {
 				
 				//the date of an event is equal to an increment date of the timeline
@@ -155,6 +155,9 @@ public class RunTimeline {
 				System.out.println(".");
 			}
 		}
+		//print end date of timeline
+		System.out.println("-" + calEnd);
+		
 		
 	}
 
