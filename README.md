@@ -12,7 +12,11 @@ The Second column contains the events
 
 e.g.
 
+<<<<<<< HEAD
 1669,Phosphorus discovered      
+=======
+1669,Phosphorus discovered  
+>>>>>>> branch 'master' of https://github.com/SaigaSteppe/Timeline-text-based.git
 1735,Colbalt discovered  
 1735,Platinum discovered  
 1753,Bismuth discovered  
