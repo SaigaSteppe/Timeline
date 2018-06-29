@@ -17,7 +17,7 @@ public class RunTimeline {
 		int timelineStart = calculateStart(timeEvent);
 		int timelineEnd = calculateEnd(timeEvent);
 		
-		printTimeline(map1, timelineStart,timelineEnd, calculateIncrement(timelineStart,timelineEnd));
+		printTimeline(map1, timelineStart,timelineEnd, getIncrement(timelineStart,timelineEnd));
 	}
 	
 	/**
@@ -90,7 +90,7 @@ public class RunTimeline {
 	/**
 	 * Returns an Arraylist of increments of the timeline
 	 */
-	public static ArrayList<Integer> calculateIncrement(int calculateStart,int calculateEnd) {
+	public static ArrayList<Integer> getIncrement(int calculateStart,int calculateEnd) {
 		int increment;
 		ArrayList<Integer> timeIncrement = new ArrayList<Integer> ();
 		int difference = calculateEnd - calculateStart;
@@ -110,8 +110,8 @@ public class RunTimeline {
 			timeIncrement.add(i);
 		}
 		
-		if(timeIncrement.contains(calculateEnd)) {
-			timeIncrement.remove(timeIncrement.indexOf(calculateEnd));
+		if(!timeIncrement.contains(calculateEnd)) {
+			timeIncrement.add(calculateEnd);
 		}
 		return timeIncrement;
 		
@@ -120,19 +120,19 @@ public class RunTimeline {
 	/**
 	 * Prints the timeline
 	 */
-	public static void printTimeline(Map<Integer, ArrayList<String>> dateEventMap,int calStart, int calEnd, ArrayList<Integer> calIncrement) {
+	public static void printTimeline(Map<Integer, ArrayList<String>> dateEventMap,int calStart, int calEnd, ArrayList<Integer> timeLineIncrements) {
 		int incrementIndex = 0;
 	
-		for(int i = calStart; i<calEnd; i++) {
+		for(int i = calStart; i<=calEnd; i++) {
 
 			//i is equal to the date in the map
 			if(dateEventMap.containsKey(i)) {
 				
 				//the date of an event is equal to an increment date of the timeline
-				if(i == calIncrement.get(incrementIndex)) {
+				if(i == timeLineIncrements.get(incrementIndex)) {
 					System.out.println("-" + i + " " + dateEventMap.get(i));
 					
-					if(incrementIndex < calIncrement.size()-1) {
+					if(incrementIndex < timeLineIncrements.size()-1) {
 						++incrementIndex;
 					}
 				}
@@ -143,10 +143,10 @@ public class RunTimeline {
 			}
 			
 			//i is equal to an increment date of the timeline
-			else if(i == calIncrement.get(incrementIndex)) {
-				System.out.println("-" + calIncrement.get(incrementIndex));
+			else if(i == timeLineIncrements.get(incrementIndex)) {
+				System.out.println("-" + timeLineIncrements.get(incrementIndex));
 				
-				if(incrementIndex < calIncrement.size()-1) {
+				if(incrementIndex < timeLineIncrements.size()-1) {
 					++incrementIndex;
 				}
 			}
@@ -155,10 +155,8 @@ public class RunTimeline {
 				System.out.println(".");
 			}
 		}
-		//print end date of timeline
-		System.out.println("-" + calEnd);
-		
-		
+
+				
 	}
 
 
