@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
+
 public class RunTimeline {
 	
 	public static void main(String[] args) {
@@ -17,7 +18,7 @@ public class RunTimeline {
 		int timelineStart = calculateStart(timeEvent);
 		int timelineEnd = calculateEnd(timeEvent);
 		
-		printTimeline(map1, timelineStart,timelineEnd, getIncrement(timelineStart,timelineEnd));
+		printTimeline(map1, timelineStart,timelineEnd, getTickMarks(timelineStart,timelineEnd));
 	}
 	
 	/**
@@ -90,9 +91,9 @@ public class RunTimeline {
 	/**
 	 * Returns an Arraylist of increments of the timeline
 	 */
-	public static ArrayList<Integer> getIncrement(int calculateStart,int calculateEnd) {
+	public static ArrayList<Integer> getTickMarks(int calculateStart,int calculateEnd) {
 		int increment;
-		ArrayList<Integer> timeIncrement = new ArrayList<Integer> ();
+		ArrayList<Integer> tickMarks = new ArrayList<Integer> ();
 		int difference = calculateEnd - calculateStart;
 		
 		if(difference < 50) {
@@ -107,33 +108,33 @@ public class RunTimeline {
 		}
 		
 		for(int i = calculateStart; i<calculateEnd; i += increment) {
-			timeIncrement.add(i);
+			tickMarks.add(i);
 		}
 		
-		if(!timeIncrement.contains(calculateEnd)) {
-			timeIncrement.add(calculateEnd);
+		if(!tickMarks.contains(calculateEnd)) {
+			tickMarks.add(calculateEnd);
 		}
-		return timeIncrement;
+		return tickMarks;
 		
 	}
 	
 	/**
 	 * Prints the timeline
 	 */
-	public static void printTimeline(Map<Integer, ArrayList<String>> dateEventMap,int calStart, int calEnd, ArrayList<Integer> timeLineIncrements) {
-		int incrementIndex = 0;
+	public static void printTimeline(Map<Integer, ArrayList<String>> dateEventMap,int calStart, int calEnd, ArrayList<Integer> tickMarks) {
+		int tickMarkIndex = 0;
 	
 		for(int i = calStart; i<=calEnd; i++) {
 
 			//i is equal to the date in the map
 			if(dateEventMap.containsKey(i)) {
 				
-				//the date of an event is equal to an increment date of the timeline
-				if(i == timeLineIncrements.get(incrementIndex)) {
+				//the date of an event is equal to an tick mark date of the timeline
+				if(i == tickMarks.get(tickMarkIndex)) {
 					System.out.println("-" + i + " " + dateEventMap.get(i));
 					
-					if(incrementIndex < timeLineIncrements.size()-1) {
-						++incrementIndex;
+					if(tickMarkIndex < tickMarks.size()-1) {
+						++tickMarkIndex;
 					}
 				}
 				
@@ -143,11 +144,11 @@ public class RunTimeline {
 			}
 			
 			//i is equal to an increment date of the timeline
-			else if(i == timeLineIncrements.get(incrementIndex)) {
-				System.out.println("-" + timeLineIncrements.get(incrementIndex));
+			else if(i == tickMarks.get(tickMarkIndex)) {
+				System.out.println("-" + tickMarks.get(tickMarkIndex));
 				
-				if(incrementIndex < timeLineIncrements.size()-1) {
-					++incrementIndex;
+				if(tickMarkIndex < tickMarks.size()-1) {
+					++tickMarkIndex;
 				}
 			}
 				
